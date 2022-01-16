@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Меню
+{% endblock %}
+
+{% block content %}
+    {% include 'includes/navbar.html' only with a=100 b=200 %}
+    <ul>
+    {% for zodiac in zodiacs%}
+        <li>
+            <a href="{% url 'horoscope-name' sign_zodiac=zodiac %}">{{ forloop.counter0 }}{{ zodiac|capfirst}}</a>
+        </li>
+    {% endfor%}
+    </ul>
+    {% include 'includes/navbar.html' %}
+{% endblock %}

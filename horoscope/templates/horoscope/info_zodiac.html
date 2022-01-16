@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Гороскоп для {{ sign|capfirst }}
+{% endblock %}
+
+{% block content %}
+    {% include 'includes/navbar.html' %}
+    <h1>Приложение Гороскоп</h1>
+    {% if description_zodiac is None %}
+        <h2>Неправильный знак зодиака - {{ sign|upper }}</h2>
+    {% else %}
+        <h2>{{ description_zodiac|title|safe }}</h2>
+    {% endif %}
+{% endblock %}
