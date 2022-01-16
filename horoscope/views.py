@@ -23,7 +23,7 @@ zodiac_dict = {
         'date': ((6, 7), (22, 22))
     },
     "leo": {
-        'description': "<i>Лев - пятый знак зодиака</i>, солнце (с 23 июля по 21 августа).",
+        'description': "Лев - пятый знак зодиака, солнце (с 23 июля по 21 августа).",
         'date': ((7, 8), (23, 21))
     },
     "virgo": {
@@ -66,13 +66,20 @@ zodiac_types = {
 
 
 def index(request):
-    zodiacs = list(zodiac_dict)
-    # f"<li><a href='{redirect_path}'>{sign.title()}</a></li>"
     context = {
-        'zodiacs': zodiacs,
         'zodiac_dict': zodiac_dict
     }
     return render(request, 'horoscope/index.html', context=context)
+
+
+def get_info_about_sign_zodiac(request, sign_zodiac: str):
+    description = zodiac_dict.get(sign_zodiac).get('description')
+    data = {
+        'description_zodiac': description,
+        'sign': sign_zodiac,
+        'zodiac_dict': zodiac_dict,
+    }
+    return render(request, 'horoscope/info_zodiac.html', context=data)
 
 
 def view_zodiac_types(request):
@@ -112,23 +119,6 @@ class Person:
 
     def __str__(self):
         return f'This is {self.name}'
-
-
-def get_info_about_sign_zodiac(request, sign_zodiac: str):
-    description = zodiac_dict.get(sign_zodiac)['description'] if zodiac_dict.get(sign_zodiac) else None
-
-    data = {
-        'description_zodiac': description,
-        'sign': sign_zodiac,
-        'my_int': 123,
-        'my_float': 123.1234,
-        'my_list': [1, 2, 3],
-        'my_tuple': (1, 2, 3),
-        'my_dict': {'name': 'jack', 'age': 20},
-        'my_class': Person('Will', 55),
-        'value': [],
-    }
-    return render(request, 'horoscope/info_zodiac.html', context=data)
 
 
 def get_info_about_sign_zodiac_by_number(request, sign_zodiac: int):

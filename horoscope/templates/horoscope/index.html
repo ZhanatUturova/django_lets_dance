@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
     Меню
 {% endblock %}
 
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'horoscope/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'horoscope/css/info.css' %}">
+{% endblock %}
+
 {% block content %}
-    {% include 'includes/navbar.html' only with a=100 b=200 %}
+    <h1>Приложение гороскоп</h1>
     <ul>
-    {% for zodiac in zodiacs%}
+    {% for zodiac, value in zodiac_dict.items %}
         <li>
-            <a href="{% url 'horoscope-name' sign_zodiac=zodiac %}">{{ forloop.counter0 }}{{ zodiac|capfirst}}</a>
+            <a href="{% url 'horoscope-name' sign_zodiac=zodiac %}">{{ zodiac|capfirst}}</a>
         </li>
     {% endfor%}
     </ul>
-    {% include 'includes/navbar.html' %}
 {% endblock %}
